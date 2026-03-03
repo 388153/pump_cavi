@@ -4,13 +4,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, accuracy_score, confusion_matrix, ConfusionMatrixDisplay
-
+from sklearn.svm import SVC
 
 st.subheader(':blue[Prediction of Cavitation in Centrifugal Pump]')
 #Data Set Input to train and to test 
 
 st.warning(":ตัวอย่าง ค่าการสั่นสะเทือนในแนวแกน x, y, z และค่าเป้าหมาย Target เพื่อใชัในการเรียนรู้และทดสอบของโมเดล ")
-vibra_input = pd.read_csv('Cavi.csv')
+vibra_input = pd.read_csv('/Users/patiparnboonruam/Web App/Cavi.csv')
 st.write(vibra_input.sample(3))
 
 X = vibra_input[['Acceleration x (m/s^2)', 'Acceleration y (m/s^2)','Acceleration z (m/s^2)']]
@@ -27,7 +27,11 @@ Cavi_rf = RandomForestClassifier(n_estimators=100, random_state=42)
 Cavi_rf.fit(X_train_sc, y_train)
 y_pred_rf = Cavi_rf.predict(X_test_sc)
 
-st.info(':blue[กรุณาป้อนค่าการสั่นสะเทือนตามแนวแกน x, y, z เพื่อทำนายการเกิด คาวิเตชันในปั๊มหอยโข่งตามวิธี Random Forest]')
+Cavi_svm = SVC()
+Cavi_svm.fit(X_train_sc, y_train)
+y_pred_svm = Cavi_svm.predict(X_test_sc)
+
+st.info(':blue[กรุณาป้อนค่าการสั่นสะเทือนตามแนวแกน x, y, z เพื่อทำนายการเกิด คาวิเตชันในปั๊มหอยโข่ง]')
 
 # Create New Data Input for Prediction
 vx = st.number_input('Vibration X', value=0.0)
@@ -44,8 +48,29 @@ new_data_point = pd.DataFrame([{
 # To Scale New Data Input
 new_data_point_sc = scaler.transform(new_data_point)
 
-# Make a prediction using the Random Forest model
-prediction = Cavi_rf.predict(new_data_point_sc)
+# Define icons based on prediction results
+status_icons = {
+    "NoCavi": "✅",
+    "50Cavi": "⚠️",
+    "Cavi": "❌"
+}
 
-st.subheader(f":green[ขณะนี้ปั๊มกำลังทำงานที่สะภาวะ:] {prediction[0]}")
-st.write(classification_report(y_test, y_pred_rf))
+# Make a prediction using the Random Forest model
+predictionRF = Cavi_rf.predict(new_data_point_sc)
+
+current_iconRF = status_icons.get(predictionRF[0], "⚙️")
+
+st.subheader(f"{current_iconRF}:green[ ปั๊มทำงานที่สะภาวะ:] {predictionRF[0]}")
+scoreRF = accuracy_score(y_test, y_pred_rf)
+st.write(f"ด้วยวิธี Random Forest ให้ความแม่นยำเท่ากับ: {scoreRF:.2f}")
+
+
+# Make a prediction using the SVM model
+predictionSVM = Cavi_svm.predict(new_data_point_sc)
+current_iconSVM = status_icons.get(predictionSVM[0], "⚙️")
+
+st.subheader(f"{current_iconSVM} :green[ปั๊มทำงานที่สะภาวะ:] {predictionSVM[0]}")
+
+y_pred_svm = Cavi_svm.predict(X_test_sc)
+scoreSVM = accuracy_score(y_test, y_pred_svm)
+st.write(f"ด้วยวิธี Support Vector Machine ให้ความแม่นยำเท่ากับ: {scoreSVM:.2f}")
