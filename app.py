@@ -1,0 +1,51 @@
+import streamlit as st
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, accuracy_score, confusion_matrix, ConfusionMatrixDisplay
+
+
+st.subheader(':blue[Prediction of Cavitation in Centrifugal Pump]')
+#Data Set Input to train and to test 
+
+st.warning(":ตัวอย่าง ค่าการสั่นสะเทือนในแนวแกน x, y, z และค่าเป้าหมาย Target เพื่อใชัในการเรียนรู้และทดสอบของโมเดล ")
+vibra_input = pd.read_csv('/Users/patiparnboonruam/Web App/Cavi.csv')
+st.write(vibra_input.sample(3))
+
+X = vibra_input[['Acceleration x (m/s^2)', 'Acceleration y (m/s^2)','Acceleration z (m/s^2)']]
+y = vibra_input['Target']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 42)
+
+#To Scale Data Set
+scaler = StandardScaler()
+
+X_train_sc = scaler.fit_transform(X_train)
+X_test_sc = scaler.transform(X_test)
+
+Cavi_rf = RandomForestClassifier(n_estimators=100, random_state=42)
+Cavi_rf.fit(X_train_sc, y_train)
+y_pred_rf = Cavi_rf.predict(X_test_sc)
+
+st.info(':blue[กรุณาป้อนค่าการสั่นสะเทือนตามแนวแกน x, y, z เพื่อทำนายการเกิด คาวิเตชันในปั๊มหอยโข่งตามวิธี Random Forest]')
+
+# Create New Data Input for Prediction
+vx = st.number_input('Vibration X', value=0.0)
+vy = st.number_input('Vibration Y', value=0.0)
+vz = st.number_input('Vibration Z', value=0.0)
+
+# Create a DataFrame for the new data point
+new_data_point = pd.DataFrame([{
+    'Acceleration x (m/s^2)': vx,
+    'Acceleration y (m/s^2)': vy,
+    'Acceleration z (m/s^2)': vz
+}])
+
+# To Scale New Data Input
+new_data_point_sc = scaler.transform(new_data_point)
+
+# Make a prediction using the Random Forest model
+prediction = Cavi_rf.predict(new_data_point_sc)
+
+st.subheader(f":green[ขณะนี้ปั๊มกำลังทำงานที่สะภาวะ:] {prediction[0]}")
+st.write(classification_report(y_test, y_pred_rf))
