@@ -10,7 +10,7 @@ st.subheader(':blue[Prediction of Cavitation in Centrifugal Pump ⚙️]')
 #Data Set Input to train and to test 
 
 st.warning(":ตัวอย่าง ค่าการสั่นสะเทือนในแนวแกน x, y, z และค่าเป้าหมาย (Target) เพื่อใชัในการเรียนรู้และทดสอบของโมเดล ")
-vibra_input = pd.read_csv('/Users/patiparnboonruam/Web App/Cavi.csv')
+vibra_input = pd.read_csv('Cavi.csv')
 st.write(vibra_input.sample(3))
 
 X = vibra_input[['Acceleration x (m/s^2)', 'Acceleration y (m/s^2)','Acceleration z (m/s^2)']]
