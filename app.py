@@ -33,10 +33,10 @@ y_pred_svm = Cavi_svm.predict(X_test_sc)
 
 st.info(':blue[กรุณาป้อนค่าการสั่นสะเทือนตามแนวแกน x, y, z เพื่อทำนายการเกิด คาวิเตชันในปั๊มหอยโข่ง ชุดทดสอบ multi pump test ที่ วศ.เครื่องกล ม.บูรพา ชลบุรี 🏖 🧜‍♀️ 🏝 🇹🇭]')
 
-latex_unit = "m/s^2"
+u = st.latex(r"m/s^2")
 # Create New Data Input for Prediction
 
-vx = st.number_input('📳 ค่าการสั่นสะเทือนตามแนวแกน X ${latex_unit}$', value=0.0)
+vx = st.number_input('📳 ค่าการสั่นสะเทือนตามแนวแกน X ', value=0.0)
 
 vy = st.number_input('📳 ค่าการสั่นสะเทือนตามแนวแกน Y (m/s^2)', value=0.0)
 
