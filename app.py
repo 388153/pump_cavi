@@ -31,7 +31,7 @@ Cavi_svm = SVC()
 Cavi_svm.fit(X_train_sc, y_train)
 y_pred_svm = Cavi_svm.predict(X_test_sc)
 
-st.info(':blue[กรุณาป้อนค่าการสั่นสะเทือนตามแนวแกน x, y, z เพื่อทำนายการเกิด คาวิเตชันในปั๊มหอยโข่ง ชุดทดสอบ multi pump test ที่ วศ.เครื่องกล ม.บูรพา ชลบุรี 🧜‍♀️]')
+st.info(':blue[กรุณาป้อนค่าการสั่นสะเทือนตามแนวแกน x, y, z เพื่อทำนายการเกิด คาวิเตชันในปั๊มหอยโข่ง ชุดทดสอบ multi pump test ที่ วศ.เครื่องกล ม.บูรพา ชลบุรี 🏖 🧜‍♀️ 🏝]')
 
 
 # Create New Data Input for Prediction
