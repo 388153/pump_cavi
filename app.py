@@ -9,7 +9,7 @@ from sklearn.svm import SVC
 st.subheader(':blue[⚙️ Prediction of Cavitation in Centrifugal Pump ⚙️]')
 #Data Set Input to train and to test 
 
-st.warning("ตัวอย่าง ค่าการสั่นสะเทือนในแนวแกน x, y, z และค่าเป้าหมาย (Target) เพื่อใชัในการเรียนรู้และทดสอบของเครื่อง (machine learning) ")
+st.warning("ตัวอย่าง ค่าการสั่นสะเทือนตามแนวแกน x, y, z และค่าเป้าหมาย (Target) เพื่อใชัในการเรียนรู้และทดสอบของเครื่อง (machine learning) ")
 vibra_input = pd.read_csv('Cavi.csv')
 st.write(vibra_input.sample(3))
 
