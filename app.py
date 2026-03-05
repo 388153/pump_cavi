@@ -6,7 +6,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, accuracy_score, confusion_matrix, ConfusionMatrixDisplay
 from sklearn.svm import SVC
 
-st.subheader(':blue[Prediction of Cavitation in Centrifugal Pump ⚙️]')
+st.subheader(':blue[⚙️ Prediction of Cavitation in Centrifugal Pump ⚙️]')
 #Data Set Input to train and to test 
 
 st.warning("ตัวอย่าง ค่าการสั่นสะเทือนในแนวแกน x, y, z และค่าเป้าหมาย (Target) เพื่อใชัในการเรียนรู้และทดสอบของโมเดล ")
