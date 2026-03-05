@@ -68,7 +68,7 @@ st.subheader(f"{current_iconRF}:green[ ปั๊มทำงานที่ส�
 
 status_accuracyRF = {
     "NoCavi": "0.79",
-    "50Cavi": "0.76",
+    "50Cavi": "0.79",
     "Cavi": "0.76"
 }
 current_accuracyRF = status_accuracyRF.get(predictionRF[0],'0.00')
