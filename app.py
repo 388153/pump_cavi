@@ -11,7 +11,7 @@ st.subheader(':blue[⚙️ Prediction of Cavitation in Centrifugal Pump ⚙️]'
 
 st.warning("ตัวอย่าง ค่าการสั่นสะเทือนตามแนวแกน x, y, z และค่าเป้าหมาย (Target) เพื่อใชัในการเรียนรู้และทดสอบของเครื่อง (machine learning) ")
 vibra_input = pd.read_csv('Cavi.csv')
-button1 = st.button("click here")
+button1 = st.button("click เพื่อดูข้อมูล")
 if button1:
     st.write(vibra_input.sample(3))
 
