@@ -34,14 +34,14 @@ Cavi_svm.fit(X_train_sc, y_train)
 y_pred_svm = Cavi_svm.predict(X_test_sc)
 
 st.info(':blue[กรุณาป้อนค่าการสั่นสะเทือนตามแนวแกน x, y, z เพื่อทำนายการเกิด คาวิเตชันในปั๊มหอยโข่ง ชุดทดสอบ multi pump test ที่ วศ.เครื่องกล ม.บูรพา ชลบุรี 🏖 🧜‍♀️ 🏝 🇹🇭]')
-
+col1, col2, col3 = st.columns(3)
 # Create New Data Input for Prediction
-
-vx = st.number_input('📳 ค่าการสั่นสะเทือนตามแนวแกน X (m/s^2)', value=0.0)
-
-vy = st.number_input('📳 ค่าการสั่นสะเทือนตามแนวแกน Y (m/s^2)', value=0.0)
-
-vz = st.number_input('📳 ค่าการสั่นสะเทือนตามแนวแกน Z (m/s^2)', value=0.0)
+with col1:
+vx = st.number_input('📳 ค่าการสั่นสะเทือนตามแนวแกน X $(m/s^2)$', value=0.0)
+with col2:
+vy = st.number_input('📳 ค่าการสั่นสะเทือนตามแนวแกน Y $(m/s^2)$', value=0.0)
+with col3:
+vz = st.number_input('📳 ค่าการสั่นสะเทือนตามแนวแกน Z $(m/s^2)$', value=0.0)
 
 # Create a DataFrame for the new data point
 new_data_point = pd.DataFrame([{
